@@ -1,0 +1,33 @@
+# 升序/降序
+SELECT * FROM dept ORDER BY deptno DESC/ASC
+# 更新列表
+UPDATE dept SET LOC = 'MB' WHERE deptno = 2
+# 删除
+DELETE FROM dept WHERE deptno = 3
+# 创建索引
+CREATE INDEX IN_LOC on dept (LOC)
+# 创建视图
+CREATE VIEW dept_2022 as SELECT deptno,LOC FROM dept WHERE deptno <= 4
+SELECT * FROM dept_2022
+UPDATE dept_2022 SET deptno = deptno + 7 WHERE LOC = 'MS'
+# 筛选NULL/非NULL值
+SELECT * FROM dept WHERE LOC IS NULL
+Or IS NOT NULL
+# 字段和表的别名
+SELECT deptno 个人编号,dname 部门名称 FROM dept 部门表
+# 对比检索
+SELECT deptno FROM dept INNER JOIN managers ON dept.deptno=managers.empno
+SELECT deptno FROM dept LEFT JOIN managers ON dept.deptno=managers.empno
+SELECT deptno FROM dept RIGHT JOIN managers ON dept.deptno=managers.empno
+# 子查询
+SELECT deptno FROM dept WHERE deptno IN (SELECT empno FROM managers WHERE empno <=5)
+# count 函数
+SELECT count(deptno) FROM dept
+max
+min
+sum
+avg
+# 分组函数 group by
+SELECT dname,avg(deptno) FROM dept GROUP BY dname
+# having 约束函数 对分组函数进行约束
+SELECT dname,avg(deptno) FROM dept GROUP BY dname having dname = 'Jack'
